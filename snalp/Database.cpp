@@ -9,7 +9,7 @@ char const DatabaseSchemaCreation[] =
     "BEGIN TRANSACTION;\n"
     "CREATE TABLE Languages( id integer primary key , name text );\n"
     "CREATE TABLE Categories( id integer primary key , name text );\n"
-    "CREATE TABLE Snippets( id integer primary key , topic text , description text , dependencies text , categorie integer , language integer , author text , snippet_data text );\n"
+    "CREATE TABLE Snippets( id integer primary key , topic text , description text , dependencies text , category integer , language integer , author text , snippet_data text );\n"
     "COMMIT;\n"
 };
 
@@ -62,14 +62,7 @@ std::string const & Database::GetTopic( uint64_t id )
 //##################################################################
 void Database::CreateEmptyDatabase()
 {
-    if(!m_db)
-        return;
-    char * errmsg = 0;
-    if(sqlite3_exec(m_db,DatabaseSchemaCreation,0,0,&errmsg) != SQLITE_OK)
-    {
-        SNALP_ERROR(" FATAL: " << errmsg);
-        sqlite3_free(errmsg);
-    }        
+    Execute(DatabaseSchemaCreation);
 }
 //##################################################################
 int Database::CallbackMethod(Database * _this,int count ,char**data, char**colname)
@@ -145,5 +138,92 @@ void Database::Reload()
     LoadTopics();
 }
 //##################################################################
-
+void Database::LoadTopics()
+{
+    m_result.clear();
+    m_treeview_id_map.clear();
+    std::string sql_topic = "SELECT language,category,id,topic from Snippets;";
+    Query(sql_topic);
+    try
+    {
+        for(size_t i = 0; i < m_result.size(); ++i)
+        {
+            uint64_t id       = boost::lexical_cast<uint64_t>(m_result[i]["id"]);
+            unsigned lang_id  = boost::lexical_cast<unsigned>(m_result[i]["language"]);
+            unsigned group_id = boost::lexical_cast<unsigned>(m_result[i]["category"]);
+            m_topic_map[id] = m_result[i]["topic"];
+            m_treeview_id_map[lang_id][group_id].push_back(id);
+        }
+    }
+    catch( boost::bad_lexical_cast & e )
+    {
+        SNALP_ERROR("[FATAL][Loading snippet topics] lexical_cast<uint64_t> failed | " << e.what());
+    }
+}
+//##################################################################
+void Database::AddLanguage( std::string const & lang )
+{
+    std::ostringstream ostr;
+    ostr << "INSERT INTO LANGUAGES VALUES( NULL , " << lang << ");";
+    Execute(ostr.str());
+}
+//##################################################################
+void Database::AddGroup( std::string const & group )
+{
+    std::ostringstream ostr;
+    ostr << "INSERT INTO CATEGORIES VALUES( NULL , " << group << ");";
+    Execute(ostr.str());
+}
+//##################################################################
+void Database::AddSnippet( SnippetItem const & item )
+{
+    std::ostringstream ostr;
+     ostr << "INSERT INTO SNIPPETS VALUES( NULL "
+          << "'" << item.topic          << "',"
+          << "'" << item.description    << "',"
+          << "'" << item.dependencies   << "',"
+          << item.category              << ","
+          << item.language              << ","
+          << "'" << item.author         << "',"
+          << "'" << item.snippet_data   << "');";
+     Execute(ostr.str());
+}
+//##################################################################
+void Database::GetSnippet( uint64_t id , SnippetItem & item )
+{
+    m_result.clear();
+    std::ostringstream ostr;
+    ostr << "SELECT * from SNIPPET where id = " << id;
+    Query(ostr.str());
+    try
+    {
+        if(m_result.size())
+        {
+            item.author       = m_result[0]["author"];
+            item.topic        = m_result[0]["topic"];
+            item.dependencies = m_result[0]["dependencies"];
+            item.description  = m_result[0]["description"];
+            item.snippet_data = m_result[0]["snippet_data"];
+            item.id           = boost::lexical_cast<unsigned>(m_result[0]["id"]);
+            item.language     = boost::lexical_cast<unsigned>(m_result[0]["language"]);
+            item.category     = boost::lexical_cast<unsigned>(m_result[0]["category"]);
+        }
+    }
+    catch( boost::bad_lexical_cast & e )
+    {
+        SNALP_ERROR("[FATAL][Loading snippet] lexical_cast<uint64_t> failed | " << e.what());
+    }
+}
+//##################################################################
+void Database::Execute( std::string const & sqlstatement )
+{
+    if(!m_db)
+        return;
+    char * errmsg = 0;
+    if(sqlite3_exec(m_db,sqlstatement.c_str(),0,0,&errmsg) != SQLITE_OK)
+    {
+        SNALP_ERROR(errmsg);
+        sqlite3_free(errmsg);
+    }        
+}
 //##################################################################
