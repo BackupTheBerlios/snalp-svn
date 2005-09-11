@@ -1,0 +1,1 @@
+start sqlite3 snalp.db

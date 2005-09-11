@@ -1,0 +1,5 @@
+BEGIN TRANSACTION;
+CREATE TABLE Languages( id integer primary key , name text );
+CREATE TABLE Categories( id integer primary key , name text );
+CREATE TABLE Snippets( id integer primary key , topic text , description text , dependencies text , categorie integer , language integer , author text , snippet_data text );
+COMMIT;
