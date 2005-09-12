@@ -121,6 +121,9 @@
 				RelativePath=".\Database.cpp">
 			</File>
 			<File
+				RelativePath=".\MainWindow.cpp">
+			</File>
+			<File
 				RelativePath=".\snalp.cpp">
 			</File>
 		</Filter>
@@ -133,6 +136,9 @@
 			</File>
 			<File
 				RelativePath=".\debughelpher.h">
+			</File>
+			<File
+				RelativePath=".\MainWindow.h">
 			</File>
 			<File
 				RelativePath=".\types.h">
