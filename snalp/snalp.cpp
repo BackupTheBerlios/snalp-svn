@@ -6,14 +6,9 @@
 #include <iostream>
 #include "Database.h"
 #include "debughelpher.h"
-#include <gtkmm.h>
-
+#include "MainWindow.h"
 
 int main(int argc, char** argv)
 {
-    Gtk::Main main_obj(argc,argv);
-    Gtk::Window window_obj;
-    main_obj.run(window_obj);
-    //Database db;
-	return 0;
+    return MainWindow::Run(argc,argv);
 }
