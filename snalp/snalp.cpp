@@ -1,7 +1,5 @@
 // snalp.cpp : Definiert den Einstiegspunkt für die Konsolenanwendung.
 //
-#pragma warning( disable :4250)
-#pragma warning( disable :4541)
 
 #include <iostream>
 #include "Database.h"

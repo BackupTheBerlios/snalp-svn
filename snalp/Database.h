@@ -1,6 +1,5 @@
 #ifndef GUARD_DATABASE_H_INCLUDED
 #define GUARD_DATABASE_H_INCLUDED
-#include "libsqlite3/sqlite3.h"
 #include "types.h"
 #include <vector>
 #include <string>
@@ -12,7 +11,7 @@ typedef std::map< uint64_t , std::string > IdToStringMap;
 typedef std::map< unsigned , std::map< unsigned , IdList > > TreeviewIdMap;
 typedef std::map< std::string , std::string > ResultMap;
 typedef std::vector<ResultMap>                ResultMapList;
-
+struct sqlite3;
 struct SnippetItem
 {
     uint64_t id;

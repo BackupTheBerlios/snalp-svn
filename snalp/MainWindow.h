@@ -1,6 +1,8 @@
+#pragma warning( disable :4250)
+#pragma warning( disable :4541)
 #pragma once
 #include <gtkmm.h>
-#include <glademm.h> 
+//#include <glademm.h> 
 #include <map>
 class MainWindow
 {

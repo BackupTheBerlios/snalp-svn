@@ -3,6 +3,7 @@
 #include <boost/lexical_cast.hpp>
 
 #pragma comment(lib,"libsqlite3/release/libsqlite3.lib")
+#include "libsqlite3/sqlite3.h"
 
 char const DatabaseSchemaCreation[] = 
 {
