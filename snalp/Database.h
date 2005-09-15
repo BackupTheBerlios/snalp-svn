@@ -1,6 +1,6 @@
 #ifndef GUARD_DATABASE_H_INCLUDED
 #define GUARD_DATABASE_H_INCLUDED
-#include "sqlite3.h"
+#include "libsqlite3/sqlite3.h"
 #include "types.h"
 #include <vector>
 #include <string>
