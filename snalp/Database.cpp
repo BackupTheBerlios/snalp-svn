@@ -1,6 +1,7 @@
 #include "database.h"
 #include "debughelpher.h"
 #include <boost/lexical_cast.hpp>
+#include <boost/format.hpp>
 
 #pragma comment(lib,"libsqlite3/release/libsqlite3.lib")
 #include "libsqlite3/sqlite3.h"
@@ -178,16 +179,16 @@ void Database::AddGroup( std::string const & group )
 //##################################################################
 void Database::AddSnippet( SnippetItem const & item )
 {
-    std::ostringstream ostr;
-     ostr << "INSERT INTO SNIPPETS VALUES( NULL "
-          << "'" << item.topic          << "',"
-          << "'" << item.description    << "',"
-          << "'" << item.dependencies   << "',"
-          << item.category              << ","
-          << item.language              << ","
-          << "'" << item.author         << "',"
-          << "'" << item.snippet_data   << "');";
-     Execute(ostr.str());
+    std::string format_string = "INSERT INTO SNIPPETS VALUES( NULL,'%1%','%2%','%3%',%4%,%5%,'%6%','%7%');";
+    boost::format fmt(format_string);
+    fmt % item.topic 
+        % item.description 
+        % item.dependencies
+        % item.category
+        % item.language
+        % item.author
+        % item.snippet_data;
+     Execute(fmt.str());
 }
 //##################################################################
 void Database::GetSnippet( uint64_t id , SnippetItem & item )
