@@ -18,7 +18,7 @@ public:
     ~SnippetTreeView();
     void AddLanguage( Glib::ustring const & language );
     void AddCategory( Glib::ustring const & language , Glib::ustring const & category );
-    void AddSnippet ( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title    , uint64_t id );
+    void AddSnippet ( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title , uint64_t id );
 private:
     struct ModelColumns : Gtk::TreeModel::ColumnRecord
     {
@@ -27,9 +27,16 @@ private:
         Gtk::TreeModelColumn<Glib::ustring> m_text;
         Gtk::TreeModelColumn<uint64_t> m_id;
     };  
+private:
+    typedef Gtk::TreeModel::iterator tree_iter;
+private:
     ModelColumns m_columns;
     std::map< Glib::ustring , Gtk::TreeIter > m_language_iter_map;
     Glib::RefPtr<Gtk::TreeStore> m_storage;
     Gtk::TreeView * m_treeview;
+private:
+    bool ExistsLanguage( Glib::ustring const & language );
+    bool ExistsCategory( Glib::ustring const & language , Glib::ustring const & category );
+    bool ExistsSnippet ( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title , uint64_t id );
 };
 #endif //GUARD_SNIPPETTREEVIEW_H_INCLUDED

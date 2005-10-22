@@ -1,5 +1,5 @@
 #include <iostream>
-#include ".\snippettreeview.h"
+#include "SnippetTreeView.h"
 
 SnippetTreeView::SnippetTreeView( Glib::RefPtr<Gnome::Glade::Xml> xmlref)
 {
@@ -29,7 +29,7 @@ SnippetTreeView::ModelColumns::~ModelColumns()
 }
 void SnippetTreeView::AddLanguage( Glib::ustring const & language )
 {
-    if(m_language_iter_map.find(language) == m_language_iter_map.end())
+    if(!ExistsLanguage(language))
     {
         m_language_iter_map[language] = m_storage->append();
         Gtk::TreeModel::Row row = *(m_language_iter_map[language]);
@@ -39,9 +39,17 @@ void SnippetTreeView::AddLanguage( Glib::ustring const & language )
 }
 void SnippetTreeView::AddCategory( Glib::ustring const & language , Glib::ustring const & category )
 {
+
+    if(m_language_iter_map.find(language) == m_language_iter_map.end())
+        AddLanguage(language);
+
+    Gtk::TreeModel::Row row = *(m_storage->append(m_language_iter_map[language]->children()));
+    row[m_columns.m_text] = category;
+    row[m_columns.m_id]   = (uint64_t)-1;   
 }
 void SnippetTreeView::AddSnippet( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title    , uint64_t id )
 {
+
 }
 SnippetTreeView::~SnippetTreeView()
 {
@@ -50,4 +58,34 @@ SnippetTreeView::ModelColumns::ModelColumns()
 {
     add(m_text);
     add(m_id);
+}
+bool SnippetTreeView::ExistsLanguage( Glib::ustring const & language )
+{
+    return (m_language_iter_map.find(language) != m_language_iter_map.end());
+}
+
+bool SnippetTreeView::ExistsCategory( Glib::ustring const & language , Glib::ustring const & category )
+{
+    if(ExistsLanguage(language))
+    {
+        tree_iter iter = m_language_iter_map[language];
+        for(tree_iter b = iter->children().begin(), e = iter->children().end(); b != e; ++b)
+            if((*b)[m_columns.m_text] == category)
+                true;
+    }
+    return false;
+}
+
+bool SnippetTreeView::ExistsSnippet ( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title , uint64_t id )
+{
+    if(ExistsCategory(language,category))
+    {
+        tree_iter iter = m_language_iter_map[language];
+        for(tree_iter b = iter->children().begin(), e = iter->children().end(); b != e; ++b)
+            if((*b)[m_columns.m_text] == category)
+                for(tree_iter b_child = iter->children().begin(), e_child = iter->children().end(); b_child != e_child; ++b_child)
+                    if((*b_child)[m_columns.m_text] == title && (*b_child)[m_columns.m_id] == id)
+                        return true;
+    }
+    return false;
 }

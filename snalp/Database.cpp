@@ -1,4 +1,4 @@
-#include "database.h"
+#include "Database.h"
 #include "debughelpher.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>

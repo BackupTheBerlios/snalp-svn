@@ -9,6 +9,8 @@ MainWindow::MainWindow()
         XmlRef->get_widget<Gtk::Window>("MainWindow",window);
         snippet_tv = boost::shared_ptr<SnippetTreeView>(new SnippetTreeView(XmlRef));
         snippet_tv->AddLanguage("C++");
+        snippet_tv->AddCategory("C++","File I/O");
+        snippet_tv->AddCategory("C++","File I/O","Reading files",1ULL);
     }
     catch( Gnome::Glade::XmlError & e )
     {

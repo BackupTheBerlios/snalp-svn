@@ -19,5 +19,4 @@ private:
     std::map<std::string , Gtk::Label * > DataLabels;
     Gtk::TextView * text_view;
     boost::shared_ptr<SnippetTreeView> snippet_tv;
-
 };
