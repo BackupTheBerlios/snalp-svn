@@ -49,7 +49,18 @@ void SnippetTreeView::AddCategory( Glib::ustring const & language , Glib::ustrin
 }
 void SnippetTreeView::AddSnippet( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title    , uint64_t id )
 {
-
+    if(!ExistsSnippet(language,category,title,id))
+    {
+        for(tree_iter b = m_language_iter_map[language]->children().begin(), e = m_language_iter_map[language]->children().end(); b != e; ++b)        
+        {
+            if((*b)[m_columns.m_text] == category)
+            {
+                Gtk::TreeModel::Row row = *(m_storage->append(b->children()));
+                row[m_columns.m_text] = title;
+                row[m_columns.m_id]   = id;   
+            }
+        }
+    }
 }
 SnippetTreeView::~SnippetTreeView()
 {
