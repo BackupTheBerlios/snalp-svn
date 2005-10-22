@@ -4,6 +4,7 @@
 #include <gtkmm.h>
 #include <libglademm.h>
 #include <map>
+#include <boost/shared_ptr.hpp>
 #include "SnippetTreeView.h"
 
 class MainWindow
@@ -17,5 +18,6 @@ private:
     Gtk::Window * window;
     std::map<std::string , Gtk::Label * > DataLabels;
     Gtk::TextView * text_view;
-    SnippetTreeView * snippet_tv;
+    boost::shared_ptr<SnippetTreeView> snippet_tv;
+
 };

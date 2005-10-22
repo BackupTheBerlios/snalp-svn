@@ -20,15 +20,16 @@ public:
     void AddCategory( Glib::ustring const & language , Glib::ustring const & category );
     void AddSnippet ( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title    , uint64_t id );
 private:
-    std::map< Glib::ustring , Gtk::TreeIter > LanguageIterator;
-    Glib::RefPtr<Gtk::TreeStore> m_storage;
-    Gtk::TreeView * m_treeview;
     struct ModelColumns : Gtk::TreeModel::ColumnRecord
     {
         ModelColumns();
         virtual ~ModelColumns();
         Gtk::TreeModelColumn<Glib::ustring> m_text;
         Gtk::TreeModelColumn<uint64_t> m_id;
-    };
+    };  
+    ModelColumns m_columns;
+    std::map< Glib::ustring , Gtk::TreeIter > m_language_iter_map;
+    Glib::RefPtr<Gtk::TreeStore> m_storage;
+    Gtk::TreeView * m_treeview;
 };
 #endif //GUARD_SNIPPETTREEVIEW_H_INCLUDED
