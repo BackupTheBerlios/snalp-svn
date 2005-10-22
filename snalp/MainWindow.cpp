@@ -1,5 +1,5 @@
 #include <iostream>
-#include "mainwindow.h"
+#include "MainWindow.h"
 
 MainWindow::MainWindow()
 : window(0)
@@ -10,7 +10,7 @@ MainWindow::MainWindow()
         snippet_tv = boost::shared_ptr<SnippetTreeView>(new SnippetTreeView(XmlRef));
         snippet_tv->AddLanguage("C++");
         snippet_tv->AddCategory("C++","File I/O");
-        snippet_tv->AddCategory("C++","File I/O","Reading files",1ULL);
+        snippet_tv->AddSnippet("C++","File I/O","Reading files",1ULL);
     }
     catch( Gnome::Glade::XmlError & e )
     {
