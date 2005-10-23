@@ -12,4 +12,4 @@ btidir:
 clean:
 	@echo Cleaning up ...
 	@(cd src;$(MAKE) clean;)
-	@rm -f *.o *.a
+	@-rm *.o *.a

@@ -26,7 +26,8 @@ $(OBJS): $(HDRS)
 	@g++ ${CFLAGS} -c -o $@ $<
 		   
 snalp: ${OBJS} 
-	g++ ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
+	@echo Building $@
+	@g++ ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
 
 libsqlite3/libsnalpsqlite.a: libsqlite3
 libsqlite3: 
@@ -39,9 +40,10 @@ install:
 	@echo atm haben wir das install target ned ins makefile eingebaut
 
 thisclean:
-	rm -f snalp *.o
+	@echo Cleaning up ...
+	@-rm snalp *.o
 	
 clean: thisclean
-	(cd libsqlite3;$(MAKE) clean;)
+	@(cd libsqlite3;$(MAKE) clean;)
 
 .PHONY: thisclean clean

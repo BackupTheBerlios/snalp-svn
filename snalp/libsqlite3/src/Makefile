@@ -8,11 +8,13 @@ OBJS:= $(SRC:.c=.o)
 #$(OBJS) : Makefile
 
 bti.o: $(OBJS)
-	ld -r -o $@ $(OBJS)
+	@echo linking $@
+	@ld -r -o $@ $(OBJS)
 
 .c.o: Makefile
 	@echo Compiling $< to $@
 	@$(CC) -c -o $@ $<
 
 clean:
-	rm -f *.o
+	@echo Cleaning up ...
+	@-rm *.o
