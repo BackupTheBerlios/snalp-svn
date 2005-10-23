@@ -1,5 +1,5 @@
 #include "Database.h"
-#include "debughelpher.h"
+#include "debughelper.h"
 #include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
 
