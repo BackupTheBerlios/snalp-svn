@@ -1,18 +1,18 @@
-#!/bin/bash
-function needlib
+#!/bin/sh
+needlib()
 {
-	echo -e "\n\nyou need to install $1"
+	printf "\n\nyou need to install $1"
 	exit 1
 }
 
 #FIXME : add version support
-function pkglib-check
+pkglib-check()
 {
 	echo -n "Checking for $1 ...  "
 	
 	pkg-config $1 --modversion 2>&1 >/dev/null
 	
-	if [ $? == 1 ]
+	if [ $? -eq 1 ]
 	then 
 		echo "not found!"
 		needlib $1
@@ -22,19 +22,55 @@ function pkglib-check
 	echo "$VER found"
 }
 
-function lib-file-check
+# check for a file in different places
+# return path of file without the filename
+# $1 filename
+# $2-n paths
+file-check()
 {
-	echo -n "Checking for $1 ...  "
-	if [ ! -f $2 ]
-	then
-		echo "not found!"
-		needlib $1
-	fi
-
-	echo found - dunno wich version ";P"
+	checkfile=$1
+	shift
+	path=
+	for f in $*; do
+		if [ -f $f/$checkfile ]
+		then
+			path=$f
+			break
+		fi
+	done
+	echo $path
 }
 
+# check for library $1 in different paths, set `upcase $1`_LDFLAGS
+lib-file-check() 
+{
+	lib=$1
+	file=$2
+	shift; shift;
+	path=`file-check $file $*`
+	echo $path
+	if [ -z "$path" ]; then
+		needlib $lib
+	fi
+	ulib=`echo $lib | tr '[a-z]' '[A-Z]'`
+	eval ${ulib}_LDFLAGS='-L"\$path"'
+}
 
+# check for header file $1 in different paths, set `upcase $1`_CPPFLAGS
+include-file-check() 
+{
+	lib=$1
+	file=$2
+	shift; shift;
+	path=`file-check $file $*`
+	echo $path
+	if [ -z "$path" ]; then
+		needlib $lib
+	fi
+	ulib=`echo $lib | tr '[a-z]' '[A-Z]'`
+	eval ${ulib}_CPPFLAGS=-I"\$path"
+}
 
+include-file-check "boost" "version.hpp" "/usr/include/boost" "/usr/local/include/boost"
+echo "boost: $BOOST_CPPFLAGS"
 pkglib-check "libglademm-2.4"
-lib-file-check "boost" "/usr/include/boost/version.hpp"
