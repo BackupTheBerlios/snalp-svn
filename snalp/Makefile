@@ -33,7 +33,7 @@ libsqlite3/libsnalpsqlite.a:
 	@(cd libsqlite3;$(MAKE);)
 
 thisclean:
-	rm snalp *.o||true
+	rm -f snalp *.o
 	
 clean: thisclean
 	(cd libsqlite3;$(MAKE) clean;)

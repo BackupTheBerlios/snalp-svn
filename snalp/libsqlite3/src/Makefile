@@ -15,4 +15,4 @@ bti.o: $(OBJS)
 	@$(CC) -c -o $@ $<
 
 clean:
-	rm *.o||true
+	rm -f *.o

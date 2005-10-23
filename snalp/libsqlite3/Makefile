@@ -10,4 +10,4 @@ src/bti.o:
 clean:
 	@echo Cleaning up ...
 	@(cd src;$(MAKE) clean;)
-	@rm *.o *.a||true
+	@rm -f *.o *.a
