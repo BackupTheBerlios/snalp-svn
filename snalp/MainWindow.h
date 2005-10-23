@@ -1,6 +1,9 @@
-#pragma warning( disable :4250)
-#pragma warning( disable :4541)
-#pragma once
+#ifdef _MSC_VER
+    #pragma warning( disable :4250)
+    #pragma warning( disable :4541)
+    #pragma once
+#endif
+
 #include <gtkmm.h>
 #include <libglademm.h>
 #include <map>
