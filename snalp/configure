@@ -6,7 +6,9 @@ needlib()
 }
 
 #FIXME : add version support
-pkglib-check()
+
+pkglib_check()
+
 {
 	echo -n "Checking for $1 ...  "
 	
@@ -26,7 +28,7 @@ pkglib-check()
 # return path of file without the filename
 # $1 filename
 # $2-n paths
-file-check()
+file_check()
 {
 	checkfile=$1
 	shift
@@ -42,35 +44,41 @@ file-check()
 }
 
 # check for library $1 in different paths, set `upcase $1`_LDFLAGS
-lib-file-check() 
+lib_file_check() 
 {
 	lib=$1
 	file=$2
 	shift; shift;
-	path=`file-check $file $*`
-	echo $path
+	path=`file_check $file $*`
+	#echo $path
 	if [ -z "$path" ]; then
 		needlib $lib
 	fi
-	ulib=`echo $lib | tr '[a-z]' '[A-Z]'`
-	eval ${ulib}_LDFLAGS='-L"\$path"'
+	ulib=`echo $lib | tr '[[:lower:]]' '[[:upper:]]'`
+	eval ${ulib}_LDFLAGS=-L"\$path"
 }
 
 # check for header file $1 in different paths, set `upcase $1`_CPPFLAGS
-include-file-check() 
+include_file_check() 
 {
 	lib=$1
+	echo -n Checking for $1 "... "
 	file=$2
 	shift; shift;
-	path=`file-check $file $*`
-	echo $path
+	path=`file_check $file $*`
+	if [ -d $path ]; then
+		echo found
+		else
+		echo not found
+		fi
+	#echo $path
 	if [ -z "$path" ]; then
 		needlib $lib
 	fi
-	ulib=`echo $lib | tr '[a-z]' '[A-Z]'`
+	ulib=`echo $lib | tr '[[:lower:]]' '[[:upper:]]'`
 	eval ${ulib}_CPPFLAGS=-I"\$path"
 }
 
-include-file-check "boost" "version.hpp" "/usr/include/boost" "/usr/local/include/boost"
-echo "boost: $BOOST_CPPFLAGS"
-pkglib-check "libglademm-2.4"
+include_file_check "boost" "version.hpp" "/usr/include/boost" "/usr/local/include/boost"
+#echo "boost: $BOOST_CPPFLAGS"
+pkglib_check "libglademm-2.4"
