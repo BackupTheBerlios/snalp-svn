@@ -15,8 +15,10 @@ CFLAGS=${INCFLAGS} -Wall -O2 #-Weffc++ -fmessage-length=0
 
 LDFLAGS=`pkg-config libglademm-2.4 --libs` ${SQLITEFLAGS}
 
-.cpp.o:
-	@echo Compiling $< -> $@
+
+
+.cpp.o: Makefile
+	@echo Compiling $< to $@
 	@g++ ${CFLAGS} -c -o $@ $<
 
 OBJS=snalp.o Database.o MainWindow.o SnippetTreeView.o libsqlite3/libsnalpsqlite.a
@@ -30,10 +32,8 @@ snalp: ${OBJS}
 libsqlite3/libsnalpsqlite.a:
 	@(cd libsqlite3;$(MAKE);)
 
-
-	
-clean: thisclean libclean
-libclean:
-	(cd libsqlite3;$(MAKE) clean;)
 thisclean:
-	rm snalp *.o
+	rm snalp *.o||true
+	
+clean: thisclean
+	(cd libsqlite3;$(MAKE) clean;)

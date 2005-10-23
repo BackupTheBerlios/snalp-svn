@@ -5,12 +5,14 @@ CFLAGS= -I.. -02 -Wall
 SRC:=$(wildcard *.c)
 OBJS:= $(SRC:.c=.o)
 
-bti.o: $(OBJS)
-	ld -r -o $@ -o $@ $(OBJS)
+#$(OBJS) : Makefile
 
-.c.o:
-	@echo Compiling $@
+bti.o: $(OBJS)
+	ld -r -o $@ $(OBJS)
+
+.c.o: Makefile
+	@echo Compiling $< to $@
 	@$(CC) -c -o $@ $<
 
 clean:
-	rm *.o
+	rm *.o||true
