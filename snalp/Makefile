@@ -1,12 +1,27 @@
 ###
-### Makefile v0.1
+### Makefile v0.2
 ###
-### way too dirty, but it works
+### still dirty, but it works __better__
 ###
 
-CFLAGS=`pkg-config libglademm-2.4 --cflags --libs`
-all: snalp.x86
+INCFLAGS=`pkg-config libglademm-2.4 --cflags`
+
+SQLITEFLAGS="-lsqlite3"
+
+CFLAGS=${INCFLAGS} -Wall -O2
+
+LDFLAGS=`pkg-config libglademm-2.4 --libs` ${SQLITEFLAGS}
+
+.cpp.o:
+	g++ ${CFLAGS} -c -o $@ $<
+
+OBJS=snalp.o Database.o MainWindow.o SnippetTreeView.o 
+
+all: snalp
 install:
 	@echo atm haben wir das install target ned ins makefile eingebaut
-snalp.x86: Database.cpp  MainWindow.cpp  snalp.cpp  SnippetTreeView.cpp 
-	gcc ${CFLAGS}  -lsqlite3 -Wall -o snalp.x86 *.cpp
+snalp: ${OBJS} 
+	g++ ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
+
+clean:
+	rm snalp *.o
