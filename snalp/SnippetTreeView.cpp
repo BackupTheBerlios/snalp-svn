@@ -81,9 +81,14 @@ bool SnippetTreeView::ExistsCategory( Glib::ustring const & language , Glib::ust
     if(ExistsLanguage(language))
     {
         tree_iter iter = m_language_iter_map[language];
-        for(tree_iter b = iter->children().begin(), e = iter->children().end(); b != e; ++b)
+        tree_iter b = iter->children().begin();
+        tree_iter e = iter->children().end(); 
+        while(b != e)
+        {
             if((*b)[m_columns.m_text] == category)
                 return true;
+            ++b;
+        }
     }
     return false;
 }
@@ -93,11 +98,20 @@ bool SnippetTreeView::ExistsSnippet ( Glib::ustring const & language , Glib::ust
     if(ExistsCategory(language,category))
     {
         tree_iter iter = m_language_iter_map[language];
-        for(tree_iter b = iter->children().begin(), e = iter->children().end(); b != e; ++b)
+        tree_iter b = iter->children().begin();
+        tree_iter e = iter->children().end();
+        while(b != e)
+        {
             if((*b)[m_columns.m_text] == category)
-                for(tree_iter b_child = iter->children().begin(), e_child = iter->children().end(); b_child != e_child; ++b_child)
+            {
+                tree_iter b_child = iter->children().begin();
+                tree_iter e_child = iter->children().end();
+                for( b_child != e_child; ++b_child)
                     if((*b_child)[m_columns.m_text] == title && (*b_child)[m_columns.m_id] == id)
                         return true;
+            }
+            ++b;
+        }
     }
     return false;
 }
