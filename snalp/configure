@@ -1,0 +1,40 @@
+#!/bin/bash
+function needlib
+{
+	echo -e "\n\nyou need to install $1"
+	exit 1
+}
+
+#FIXME : add version support
+function pkglib-check
+{
+	echo -n "Checking for $1 ...  "
+	
+	pkg-config $1 --modversion 2>&1 >/dev/null
+	
+	if [ $? == 1 ]
+	then 
+		echo "not found!"
+		needlib $1
+	fi
+	
+	VER=`pkg-config $1 --modversion`
+	echo "$VER found"
+}
+
+function lib-file-check
+{
+	echo -n "Checking for $1 ...  "
+	if [ ! -f $2 ]
+	then
+		echo "not found!"
+		needlib $1
+	fi
+
+	echo found
+}
+
+
+
+pkglib-check "libglademm-2.4"
+lib-file-check "boost" "/usr/include/boost/version.hpp"
