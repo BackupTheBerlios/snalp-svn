@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:\GTK\include\libglade-2.0&quot;;&quot;C:\GTK\include\libxml++-2.6&quot;;&quot;C:\GTK\include\gtkmm-2.4&quot;;&quot;C:\GTK\include\atk-1.0&quot;;&quot;C:/GTK/include/gtkmm-2.4&quot;;&quot;C:/GTK/lib/gtkmm-2.4/include&quot;;&quot;C:/GTK/include/glibmm-2.4&quot;;&quot;C:/GTK/lib/glibmm-2.4/include&quot;;&quot;C:/GTK/include/gdkmm-2.4&quot;;&quot;C:/GTK/lib/gdkmm-2.4/include&quot;;&quot;C:/GTK/include/pangomm-1.4&quot;;&quot;C:/GTK/include/atkmm-1.6&quot;;&quot;C:/GTK/include/gtk-2.0&quot;;&quot;C:/GTK/include/sigc++-2.0&quot;;&quot;C:/GTK/lib/sigc++-2.0/include&quot;;&quot;C:/GTK/include/glib-2.0&quot;;&quot;C:/GTK/lib/glib-2.0/include&quot;;&quot;C:/GTK/lib/gtk-2.0/include&quot;;&quot;C:/GTK/include/pango-1.0&quot;;&quot;C:/GTK/include/atk-1.0&quot;;C:/GTK/include/libxml2;&quot;C:/GTK/lib/libglademm-2.4/include&quot;;&quot;C:/GTK/include/libglademm-2.4&quot;"
+				AdditionalIncludeDirectories="&quot;C:/GTK/include/libglademm-2.4&quot;;&quot;C:/GTK/lib/libglademm-2.4/include&quot;;&quot;C:/GTK/include/gtkmm-2.4&quot;;&quot;C:/GTK/lib/gtkmm-2.4/include&quot;;&quot;C:/GTK/include/libglade-2.0&quot;;&quot;C:/GTK/include/glibmm-2.4&quot;;&quot;C:/GTK/lib/glibmm-2.4/include&quot;;&quot;C:/GTK/include/gdkmm-2.4&quot;;&quot;C:/GTK/lib/gdkmm-2.4/include&quot;;&quot;C:/GTK/include/pangomm-1.4&quot;;&quot;C:/GTK/include/atkmm-1.6&quot;;&quot;C:/GTK/include/gtk-2.0&quot;;&quot;C:/GTK/include/sigc++-2.0&quot;;&quot;C:/GTK/lib/sigc++-2.0/include&quot;;&quot;C:/GTK/include/glib-2.0&quot;;&quot;C:/GTK/lib/glib-2.0/include&quot;;&quot;C:/GTK/lib/gtk-2.0/include&quot;;&quot;C:/GTK/include/pango-1.0&quot;;&quot;C:/GTK/include/cairo&quot;;&quot;C:/GTK/include/atk-1.0&quot;;&quot;C:/GTK/include/libxml2&quot;;&quot;C:/GTK/include&quot;"				
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -33,7 +33,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtkmm-2.4.lib gdkmm-2.4.lib atkmm-1.6.lib gtk-win32-2.0.lib pangomm-1.4.lib glibmm-2.4.lib sigc-2.0.lib gdk-win32-2.0.lib atk-1.0.lib gdk_pixbuf-2.0.lib pangowin32-1.0.lib gdi32.lib pango-1.0.lib gobject-2.0.lib gmodule-2.0.lib glib-2.0.lib intl.lib iconv.lib libglademm-2.4.lib glade-2.0.lib xml2.lib z.lib ws2_32.lib"
+				AdditionalDependencies="gtkmm-2.4.lib gdkmm-2.4.lib atkmm-1.6.lib gtk-win32-2.0.lib pangomm-1.4.lib glibmm-2.4.lib sigc-2.0.lib gdk-win32-2.0.lib atk-1.0.lib gdk_pixbuf-2.0.lib pangowin32-1.0.lib gdi32.lib pango-1.0.lib gobject-2.0.lib gmodule-2.0.lib glib-2.0.lib intl.lib iconv.lib libglademm-2.4.lib glade-2.0.lib xml2.lib z.lib ws2_32.lib pangocairo-1.0.lib cairo.lib"
 				OutputFile="$(OutDir)/snalp.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="C:\GTK\lib"
@@ -70,7 +70,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;C:\GTK\include\gtkmm-2.4&quot;;&quot;C:\GTK\include\atk-1.0&quot;;&quot;C:/GTK/include/gtkmm-2.4&quot;;&quot;C:/GTK/lib/gtkmm-2.4/include&quot;;&quot;C:/GTK/include/glibmm-2.4&quot;;&quot;C:/GTK/lib/glibmm-2.4/include&quot;;&quot;C:/GTK/include/gdkmm-2.4&quot;;&quot;C:/GTK/lib/gdkmm-2.4/include&quot;;&quot;C:/GTK/include/pangomm-1.4&quot;;&quot;C:/GTK/include/atkmm-1.6&quot;;&quot;C:/GTK/include/gtk-2.0&quot;;&quot;C:/GTK/include/sigc++-2.0&quot;;&quot;C:/GTK/lib/sigc++-2.0/include&quot;;&quot;C:/GTK/include/glib-2.0&quot;;&quot;C:/GTK/lib/glib-2.0/include&quot;;&quot;C:/GTK/lib/gtk-2.0/include&quot;;&quot;C:/GTK/include/pango-1.0&quot;;&quot;C:/GTK/include/atk-1.0&quot;;C:/GTK/include/libxml2;&quot;C:/GTK/lib/libglademm-2.4/include&quot;;&quot;C:/GTK/include/libglademm-2.4&quot;"
+				AdditionalIncludeDirectories="&quot;C:/GTK/include/libglademm-2.4&quot;;&quot;C:/GTK/lib/libglademm-2.4/include&quot;;&quot;C:/GTK/include/gtkmm-2.4&quot;;&quot;C:/GTK/lib/gtkmm-2.4/include&quot;;&quot;C:/GTK/include/libglade-2.0&quot;;&quot;C:/GTK/include/glibmm-2.4&quot;;&quot;C:/GTK/lib/glibmm-2.4/include&quot;;&quot;C:/GTK/include/gdkmm-2.4&quot;;&quot;C:/GTK/lib/gdkmm-2.4/include&quot;;&quot;C:/GTK/include/pangomm-1.4&quot;;&quot;C:/GTK/include/atkmm-1.6&quot;;&quot;C:/GTK/include/gtk-2.0&quot;;&quot;C:/GTK/include/sigc++-2.0&quot;;&quot;C:/GTK/lib/sigc++-2.0/include&quot;;&quot;C:/GTK/include/glib-2.0&quot;;&quot;C:/GTK/lib/glib-2.0/include&quot;;&quot;C:/GTK/lib/gtk-2.0/include&quot;;&quot;C:/GTK/include/pango-1.0&quot;;&quot;C:/GTK/include/cairo&quot;;&quot;C:/GTK/include/atk-1.0&quot;;&quot;C:/GTK/include/libxml2&quot;;&quot;C:/GTK/include&quot;"				
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -82,7 +82,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="gtkmm-2.4.lib gdkmm-2.4.lib atkmm-1.6.lib gtk-win32-2.0.lib pangomm-1.4.lib glibmm-2.4.lib sigc-2.0.lib gdk-win32-2.0.lib atk-1.0.lib gdk_pixbuf-2.0.lib pangowin32-1.0.lib gdi32.lib pango-1.0.lib gobject-2.0.lib gmodule-2.0.lib glib-2.0.lib intl.lib iconv.lib libglademm-2.4.lib glade-2.0.lib xml2.lib z.lib ws2_32.lib"
+				AdditionalDependencies="gtkmm-2.4.lib gdkmm-2.4.lib atkmm-1.6.lib gtk-win32-2.0.lib pangomm-1.4.lib glibmm-2.4.lib sigc-2.0.lib gdk-win32-2.0.lib atk-1.0.lib gdk_pixbuf-2.0.lib pangowin32-1.0.lib gdi32.lib pango-1.0.lib gobject-2.0.lib gmodule-2.0.lib glib-2.0.lib intl.lib iconv.lib libglademm-2.4.lib glade-2.0.lib xml2.lib z.lib ws2_32.lib pangocairo-1.0.lib cairo.lib"
 				OutputFile="$(OutDir)/snalp.exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="C:\GTK\lib"

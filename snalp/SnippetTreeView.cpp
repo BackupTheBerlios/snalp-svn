@@ -15,14 +15,12 @@ SnippetTreeView::SnippetTreeView( Glib::RefPtr<Gnome::Glade::Xml> xmlref)
     }
     catch( Gnome::Glade::XmlError & e )
     {
-        std::cout << e.what() << std::endl;
-        system("pause");
+        SNALP_ERROR(e.what());
         exit(0);
     }
     catch(...)
     {
-        std::cout << "Other error" << std::endl;
-        system("Pause");
+        SNALP_ERROR("Other exception unspecified caught!");
         exit(0);
     }
 }
@@ -84,7 +82,7 @@ bool SnippetTreeView::ExistsCategory( Glib::ustring const & language , Glib::ust
         tree_iter iter = m_language_iter_map[language];
         for(tree_iter b = iter->children().begin(), e = iter->children().end(); b != e; ++b)
             if((*b)[m_columns.m_text] == category)
-                true;
+                return true;
     }
     return false;
 }
