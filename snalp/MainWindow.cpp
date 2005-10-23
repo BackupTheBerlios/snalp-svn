@@ -5,7 +5,7 @@ MainWindow::MainWindow()
 : window(0)
 {
     try{
-        XmlRef = Gnome::Glade::Xml::create("snalp/snalp.glade");
+        XmlRef = Gnome::Glade::Xml::create("snalp_glade_gui/snalp.glade");
         XmlRef->get_widget<Gtk::Window>("MainWindow",window);
         snippet_tv = boost::shared_ptr<SnippetTreeView>(new SnippetTreeView(XmlRef));
         snippet_tv->AddLanguage("C++");
