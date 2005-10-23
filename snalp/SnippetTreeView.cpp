@@ -42,7 +42,9 @@ void SnippetTreeView::AddCategory( Glib::ustring const & language , Glib::ustrin
 {
 
     if(m_language_iter_map.find(language) == m_language_iter_map.end())
+    {
         AddLanguage(language);
+    }
 
     Gtk::TreeModel::Row row = *(m_storage->append(m_language_iter_map[language]->children()));
     row[m_columns.m_text] = category;
@@ -86,7 +88,9 @@ bool SnippetTreeView::ExistsCategory( Glib::ustring const & language , Glib::ust
         while(b != e)
         {
             if((*b)[m_columns.m_text] == category)
+            {
                 return true;
+            }
             ++b;
         }
     }
@@ -106,9 +110,15 @@ bool SnippetTreeView::ExistsSnippet ( Glib::ustring const & language , Glib::ust
             {
                 tree_iter b_child = iter->children().begin();
                 tree_iter e_child = iter->children().end();
-                for( b_child != e_child; ++b_child)
-                    if((*b_child)[m_columns.m_text] == title && (*b_child)[m_columns.m_id] == id)
-                        return true;
+                while( b_child != e_child)
+                {
+                    if((*b_child)[m_columns.m_text] == title && 
+                       (*b_child)[m_columns.m_id]   == id)
+                    {
+                            return true;
+                    }
+                    ++b_child;
+                }
             }
             ++b;
         }
@@ -119,5 +129,7 @@ void SnippetTreeView::OnClickEvent()
 {
     tree_iter iter = m_treeview->get_selection()->get_selected();
     if((*iter)[m_columns.m_id] != (uint64_t)-1)
+    {
         on_click_slot((*iter)[m_columns.m_id]);
+    }
 }
