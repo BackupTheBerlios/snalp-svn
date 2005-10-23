@@ -1,5 +1,6 @@
 #include <iostream>
 #include "SnippetTreeView.h"
+#include "debughelper.h"
 
 SnippetTreeView::SnippetTreeView( Glib::RefPtr<Gnome::Glade::Xml> xmlref)
 {

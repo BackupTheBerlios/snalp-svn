@@ -5,7 +5,7 @@
 #include <typeinfo>
 #include "SnalpException.h"
 #include "Database.h"
-#include "debughelpher.h"
+#include "debughelper.h"
 #include "MainWindow.h"
 
 int main(int argc, char** argv)
@@ -17,10 +17,10 @@ int main(int argc, char** argv)
     }
     catch(SnalpException & e)
     {
-        SNALP_ERROR( "Caught " << typeid(e).what() << " Message: " << e.what() );
+        SNALP_ERROR( "Caught " << typeid(e).name() << " Message: " << e.what() );
     }
     catch(...)
     {
-        SNALP_ERROR( "Caught " << typeid(e).what() << " Message: " << e.what() );
+        SNALP_ERROR( "Non specified exception caught");
     }
 }

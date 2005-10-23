@@ -20,7 +20,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;C:/GTK/include/libglademm-2.4&quot;;&quot;C:/GTK/lib/libglademm-2.4/include&quot;;&quot;C:/GTK/include/gtkmm-2.4&quot;;&quot;C:/GTK/lib/gtkmm-2.4/include&quot;;&quot;C:/GTK/include/libglade-2.0&quot;;&quot;C:/GTK/include/glibmm-2.4&quot;;&quot;C:/GTK/lib/glibmm-2.4/include&quot;;&quot;C:/GTK/include/gdkmm-2.4&quot;;&quot;C:/GTK/lib/gdkmm-2.4/include&quot;;&quot;C:/GTK/include/pangomm-1.4&quot;;&quot;C:/GTK/include/atkmm-1.6&quot;;&quot;C:/GTK/include/gtk-2.0&quot;;&quot;C:/GTK/include/sigc++-2.0&quot;;&quot;C:/GTK/lib/sigc++-2.0/include&quot;;&quot;C:/GTK/include/glib-2.0&quot;;&quot;C:/GTK/lib/glib-2.0/include&quot;;&quot;C:/GTK/lib/gtk-2.0/include&quot;;&quot;C:/GTK/include/pango-1.0&quot;;&quot;C:/GTK/include/cairo&quot;;&quot;C:/GTK/include/atk-1.0&quot;;&quot;C:/GTK/include/libxml2&quot;;&quot;C:/GTK/include&quot;"				
+				AdditionalIncludeDirectories="&quot;C:/GTK/include/libglademm-2.4&quot;;&quot;C:/GTK/lib/libglademm-2.4/include&quot;;&quot;C:/GTK/include/gtkmm-2.4&quot;;&quot;C:/GTK/lib/gtkmm-2.4/include&quot;;&quot;C:/GTK/include/libglade-2.0&quot;;&quot;C:/GTK/include/glibmm-2.4&quot;;&quot;C:/GTK/lib/glibmm-2.4/include&quot;;&quot;C:/GTK/include/gdkmm-2.4&quot;;&quot;C:/GTK/lib/gdkmm-2.4/include&quot;;&quot;C:/GTK/include/pangomm-1.4&quot;;&quot;C:/GTK/include/atkmm-1.6&quot;;&quot;C:/GTK/include/gtk-2.0&quot;;&quot;C:/GTK/include/sigc++-2.0&quot;;&quot;C:/GTK/lib/sigc++-2.0/include&quot;;&quot;C:/GTK/include/glib-2.0&quot;;&quot;C:/GTK/lib/glib-2.0/include&quot;;&quot;C:/GTK/lib/gtk-2.0/include&quot;;&quot;C:/GTK/include/pango-1.0&quot;;&quot;C:/GTK/include/cairo&quot;;&quot;C:/GTK/include/atk-1.0&quot;;&quot;C:/GTK/include/libxml2&quot;;&quot;C:/GTK/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -70,7 +70,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;C:/GTK/include/libglademm-2.4&quot;;&quot;C:/GTK/lib/libglademm-2.4/include&quot;;&quot;C:/GTK/include/gtkmm-2.4&quot;;&quot;C:/GTK/lib/gtkmm-2.4/include&quot;;&quot;C:/GTK/include/libglade-2.0&quot;;&quot;C:/GTK/include/glibmm-2.4&quot;;&quot;C:/GTK/lib/glibmm-2.4/include&quot;;&quot;C:/GTK/include/gdkmm-2.4&quot;;&quot;C:/GTK/lib/gdkmm-2.4/include&quot;;&quot;C:/GTK/include/pangomm-1.4&quot;;&quot;C:/GTK/include/atkmm-1.6&quot;;&quot;C:/GTK/include/gtk-2.0&quot;;&quot;C:/GTK/include/sigc++-2.0&quot;;&quot;C:/GTK/lib/sigc++-2.0/include&quot;;&quot;C:/GTK/include/glib-2.0&quot;;&quot;C:/GTK/lib/glib-2.0/include&quot;;&quot;C:/GTK/lib/gtk-2.0/include&quot;;&quot;C:/GTK/include/pango-1.0&quot;;&quot;C:/GTK/include/cairo&quot;;&quot;C:/GTK/include/atk-1.0&quot;;&quot;C:/GTK/include/libxml2&quot;;&quot;C:/GTK/include&quot;"				
+				AdditionalIncludeDirectories="&quot;C:/GTK/include/libglademm-2.4&quot;;&quot;C:/GTK/lib/libglademm-2.4/include&quot;;&quot;C:/GTK/include/gtkmm-2.4&quot;;&quot;C:/GTK/lib/gtkmm-2.4/include&quot;;&quot;C:/GTK/include/libglade-2.0&quot;;&quot;C:/GTK/include/glibmm-2.4&quot;;&quot;C:/GTK/lib/glibmm-2.4/include&quot;;&quot;C:/GTK/include/gdkmm-2.4&quot;;&quot;C:/GTK/lib/gdkmm-2.4/include&quot;;&quot;C:/GTK/include/pangomm-1.4&quot;;&quot;C:/GTK/include/atkmm-1.6&quot;;&quot;C:/GTK/include/gtk-2.0&quot;;&quot;C:/GTK/include/sigc++-2.0&quot;;&quot;C:/GTK/lib/sigc++-2.0/include&quot;;&quot;C:/GTK/include/glib-2.0&quot;;&quot;C:/GTK/lib/glib-2.0/include&quot;;&quot;C:/GTK/lib/gtk-2.0/include&quot;;&quot;C:/GTK/include/pango-1.0&quot;;&quot;C:/GTK/include/cairo&quot;;&quot;C:/GTK/include/atk-1.0&quot;;&quot;C:/GTK/include/libxml2&quot;;&quot;C:/GTK/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;"
 				RuntimeLibrary="0"
 				RuntimeTypeInfo="TRUE"
@@ -141,10 +141,13 @@
 				RelativePath=".\Database.h">
 			</File>
 			<File
-				RelativePath=".\debughelpher.h">
+				RelativePath=".\debughelper.h">
 			</File>
 			<File
 				RelativePath=".\MainWindow.h">
+			</File>
+			<File
+				RelativePath=".\SnalpException.h">
 			</File>
 			<File
 				RelativePath=".\SnippetTreeView.h">

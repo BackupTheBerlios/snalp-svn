@@ -1,5 +1,6 @@
 #include <iostream>
 #include "MainWindow.h"
+#include "debughelper.h"
 
 MainWindow::MainWindow()
 : window(0)
