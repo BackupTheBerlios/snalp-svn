@@ -19,6 +19,7 @@ public:
     void AddLanguage( Glib::ustring const & language );
     void AddCategory( Glib::ustring const & language , Glib::ustring const & category );
     void AddSnippet ( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title , uint64_t id );
+    sigc::slot<void,uint64_t> on_click_slot; 
 private:
     struct ModelColumns : Gtk::TreeModel::ColumnRecord
     {
@@ -35,6 +36,7 @@ private:
     Glib::RefPtr<Gtk::TreeStore> m_storage;
     Gtk::TreeView * m_treeview;
 private:
+    void OnClickEvent();
     bool ExistsLanguage( Glib::ustring const & language );
     bool ExistsCategory( Glib::ustring const & language , Glib::ustring const & category );
     bool ExistsSnippet ( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title , uint64_t id );

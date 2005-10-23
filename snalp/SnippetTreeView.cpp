@@ -10,6 +10,8 @@ SnippetTreeView::SnippetTreeView( Glib::RefPtr<Gnome::Glade::Xml> xmlref)
         m_treeview->set_model(m_storage);
         m_treeview->append_column("",m_columns.m_text);
         m_treeview->set_headers_visible(false);
+        m_treeview->get_selection()->signal_changed().connect(sigc::mem_fun(*this,SnippetTreeView::OnClickEvent));
+        
     }
     catch( Gnome::Glade::XmlError & e )
     {
@@ -99,4 +101,10 @@ bool SnippetTreeView::ExistsSnippet ( Glib::ustring const & language , Glib::ust
                         return true;
     }
     return false;
+}
+void SnippetTreeView::OnClickEvent()
+{
+    tree_iter iter = m_treeview->get_selection()->get_selected();
+    if((*iter)[m_columns.m_id] != (uint64_t)-1)
+        on_click_slot((*iter)[m_columns.m_id]);
 }

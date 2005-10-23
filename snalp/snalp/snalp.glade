@@ -460,7 +460,7 @@
 			    <widget class="GtkEntry" id="entry4">
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
-			      <property name="editable">True</property>
+			      <property name="editable">False</property>
 			      <property name="visibility">True</property>
 			      <property name="max_length">0</property>
 			      <property name="text" translatable="yes"></property>
@@ -490,7 +490,7 @@
 				<widget class="GtkTextView" id="textview2">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
-				  <property name="editable">True</property>
+				  <property name="editable">False</property>
 				  <property name="overwrite">False</property>
 				  <property name="accepts_tab">True</property>
 				  <property name="justification">GTK_JUSTIFY_LEFT</property>
@@ -528,7 +528,7 @@
 				<widget class="GtkTextView" id="textview1">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
-				  <property name="editable">True</property>
+				  <property name="editable">False</property>
 				  <property name="overwrite">False</property>
 				  <property name="accepts_tab">True</property>
 				  <property name="justification">GTK_JUSTIFY_LEFT</property>
@@ -557,7 +557,7 @@
 			    <widget class="GtkEntry" id="entry5">
 			      <property name="visible">True</property>
 			      <property name="can_focus">True</property>
-			      <property name="editable">True</property>
+			      <property name="editable">False</property>
 			      <property name="visibility">True</property>
 			      <property name="max_length">0</property>
 			      <property name="text" translatable="yes"></property>
@@ -621,7 +621,7 @@
 		    <widget class="GtkTextView" id="SnippetTextView">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
-		      <property name="editable">True</property>
+		      <property name="editable">False</property>
 		      <property name="overwrite">False</property>
 		      <property name="accepts_tab">True</property>
 		      <property name="justification">GTK_JUSTIFY_LEFT</property>
