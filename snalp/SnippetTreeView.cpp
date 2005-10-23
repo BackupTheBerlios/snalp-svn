@@ -10,7 +10,7 @@ SnippetTreeView::SnippetTreeView( Glib::RefPtr<Gnome::Glade::Xml> xmlref)
         m_treeview->set_model(m_storage);
         m_treeview->append_column("",m_columns.m_text);
         m_treeview->set_headers_visible(false);
-        m_treeview->get_selection()->signal_changed().connect(sigc::mem_fun(*this,SnippetTreeView::OnClickEvent));
+        m_treeview->get_selection()->signal_changed().connect(sigc::mem_fun(*this,&SnippetTreeView::OnClickEvent));
         
     }
     catch( Gnome::Glade::XmlError & e )
