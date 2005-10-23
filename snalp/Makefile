@@ -6,16 +6,20 @@
 
 INCFLAGS=`pkg-config libglademm-2.4 --cflags`
 
-SQLITEFLAGS="-lsqlite3"
 
-CFLAGS=${INCFLAGS} -Wall -O2
+
+
+SQLITEFLAGS=#-L./libsqlite3 -lsnalpsqlite3
+
+CFLAGS=${INCFLAGS} -Wall -O2 #-Weffc++ -fmessage-length=0 
 
 LDFLAGS=`pkg-config libglademm-2.4 --libs` ${SQLITEFLAGS}
 
 .cpp.o:
-	g++ ${CFLAGS} -c -o $@ $<
+	@echo Compiling $< -> $@
+	@g++ ${CFLAGS} -c -o $@ $<
 
-OBJS=snalp.o Database.o MainWindow.o SnippetTreeView.o 
+OBJS=snalp.o Database.o MainWindow.o SnippetTreeView.o libsqlite3/libsnalpsqlite.a
 
 all: snalp
 install:
@@ -23,5 +27,13 @@ install:
 snalp: ${OBJS} 
 	g++ ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
 
-clean:
+libsqlite3/libsnalpsqlite.a:
+	@(cd libsqlite3;$(MAKE);)
+
+
+	
+clean: thisclean libclean
+libclean:
+	(cd libsqlite3;$(MAKE) clean;)
+thisclean:
 	rm snalp *.o
