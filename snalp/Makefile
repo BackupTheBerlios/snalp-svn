@@ -1,39 +1,47 @@
 ###
-### Makefile v0.2
+### Makefile v0.3
 ###
 ### still dirty, but it works __better__
 ###
 
 INCFLAGS=`pkg-config libglademm-2.4 --cflags`
 
+CFLAGS=${INCFLAGS} -Wall -O2 
+
+LDFLAGS=`pkg-config libglademm-2.4 --libs` 
 
 
+HDRS:=$(wildcard *.h *.hpp)
+	
+SRCS:=$(wildcard *.cpp)
 
-SQLITEFLAGS=#-L./libsqlite3 -lsnalpsqlite3
+OBJS:=$(SRCS:.cpp=.o) libsqlite3/libsnalpsqlite.a
 
-CFLAGS=${INCFLAGS} -Wall -O2 #-Weffc++ -fmessage-length=0 
+all: snalp
 
-LDFLAGS=`pkg-config libglademm-2.4 --libs` ${SQLITEFLAGS}
-
-
+$(OBJS): $(HDRS)
 
 .cpp.o: Makefile
 	@echo Compiling $< to $@
 	@g++ ${CFLAGS} -c -o $@ $<
-
-OBJS=snalp.o Database.o MainWindow.o SnippetTreeView.o libsqlite3/libsnalpsqlite.a
-
-all: snalp
-install:
-	@echo atm haben wir das install target ned ins makefile eingebaut
+		   
 snalp: ${OBJS} 
 	g++ ${CFLAGS} ${LDFLAGS} -o $@ ${OBJS}
 
-libsqlite3/libsnalpsqlite.a:
+libsqlite3/libsnalpsqlite.a: libsqlite3
+libsqlite3: 
+# /libsnalpsqlite.a:
 	@(cd libsqlite3;$(MAKE);)
+
+.PHONY: libsqlite3
+
+install:
+	@echo atm haben wir das install target ned ins makefile eingebaut
 
 thisclean:
 	rm -f snalp *.o
 	
 clean: thisclean
 	(cd libsqlite3;$(MAKE) clean;)
+
+.PHONY: thisclean clean

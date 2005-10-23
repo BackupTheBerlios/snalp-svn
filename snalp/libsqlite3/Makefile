@@ -3,8 +3,10 @@ libsnalpsqlite.a: sqlite.o
 	ar rs $@ $<
 sqlite.o: src/bti.o
 	cp src/bti.o $@
-.PHONY: src/bti.o
-src/bti.o:
+src/bti.o :btidir
+
+.PHONY: btidir
+btidir:
 	@(cd src;$(MAKE);)
 
 clean:
