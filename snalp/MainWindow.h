@@ -1,14 +1,10 @@
-#ifdef _MSC_VER
-    #pragma warning( disable :4250)
-    #pragma warning( disable :4541)
-    #pragma once
-#endif
+#ifndef GUARD_MAINWINDOW_H_INCLUDED
+#define GUARD_MAINWINDOW_H_INCLUDED 1
 
-#include <gtkmm.h>
-#include <libglademm.h>
-#include <map>
+#include "FowardDeclarations.h"
 #include <boost/shared_ptr.hpp>
-#include "SnippetTreeView.h"
+#include <glibmm/refptr.h>
+#include <map>
 
 class MainWindow
 {
@@ -24,3 +20,5 @@ private:
     boost::shared_ptr<SnippetTreeView> snippet_tv;
     void ConnectMenuSignals();
 };
+
+#endif

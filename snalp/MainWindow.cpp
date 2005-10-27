@@ -1,7 +1,13 @@
-#include <iostream>
+
 #include "MainWindow.h"
+
+#include <iostream>
+#include <gtkmm.h>
+#include <libglademm.h>
+#include "SnippetTreeView.h"
 #include "debughelper.h"
 
+//##################################################################################################################
 MainWindow::MainWindow()
 : window(0)
 {
@@ -20,11 +26,11 @@ MainWindow::MainWindow()
         exit(0);
     }
 }
-
+//##################################################################################################################
 MainWindow::~MainWindow()
 {
 }
-
+//##################################################################################################################
 int MainWindow::Run( int argc , char ** argv )
 {
     Gtk::Main main_obj(argc,argv);
@@ -32,13 +38,14 @@ int MainWindow::Run( int argc , char ** argv )
     main_obj.run(*application.window);
     return EXIT_SUCCESS;
 }
+//##################################################################################################################
 void MainWindow::ConnectMenuSignals()
 {
     try
     {
         Gtk::MenuItem * item = 0;
         XmlRef->get_widget<Gtk::MenuItem>("menu_beenden1",item);
-        item->signal_select().connect(sigc::mem_fun(*(this->window),&Gtk::Window::hide));
+        item->signal_activate().connect(sigc::mem_fun(*(this->window),&Gtk::Window::hide));
     }
     catch( Gnome::Glade::XmlError & e)
     {
@@ -46,3 +53,4 @@ void MainWindow::ConnectMenuSignals()
         exit(0);
     }
 }
+//##################################################################################################################

@@ -144,6 +144,9 @@
 				RelativePath=".\debughelper.h">
 			</File>
 			<File
+				RelativePath=".\FowardDeclarations.h">
+			</File>
+			<File
 				RelativePath=".\MainWindow.h">
 			</File>
 			<File

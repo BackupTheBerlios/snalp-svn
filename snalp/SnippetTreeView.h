@@ -1,14 +1,10 @@
 #ifndef GUARD_SNIPPETTREEVIEW_H_INCLUDED
 #define GUARD_SNIPPETTREEVIEW_H_INCLUDED 1
 
-#ifdef _MSC_VER
-    #pragma warning( disable :4250)
-    #pragma warning( disable :4541)
-    #pragma once
-#endif
-
-#include <libglademm.h>
-#include <gtkmm.h>
+#include "FowardDeclarations.h"
+#include <gtkmm/treemodelcolumn.h>
+#include <gtkmm/treeiter.h>
+#include <gtkmm/treestore.h>
 #include "types.h"
 
 class SnippetTreeView
@@ -40,5 +36,6 @@ private:
     bool ExistsLanguage( Glib::ustring const & language );
     bool ExistsCategory( Glib::ustring const & language , Glib::ustring const & category );
     bool ExistsSnippet ( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title , uint64_t id );
+    tree_iter FindCategoryIter( Glib::ustring const & language , Glib::ustring const & category );
 };
 #endif //GUARD_SNIPPETTREEVIEW_H_INCLUDED

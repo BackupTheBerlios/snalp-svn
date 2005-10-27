@@ -1,7 +1,12 @@
 #include <iostream>
 #include "SnippetTreeView.h"
 #include "debughelper.h"
+#include "SnalpException.h"
 
+#include <libglademm/xml.h>
+#include <gtkmm/treeview.h>
+
+//##################################################################################################################
 SnippetTreeView::SnippetTreeView( Glib::RefPtr<Gnome::Glade::Xml> xmlref)
 {
     try
@@ -25,9 +30,11 @@ SnippetTreeView::SnippetTreeView( Glib::RefPtr<Gnome::Glade::Xml> xmlref)
         exit(0);
     }
 }
+//##################################################################################################################
 SnippetTreeView::ModelColumns::~ModelColumns()
 {
 }
+//##################################################################################################################
 void SnippetTreeView::AddLanguage( Glib::ustring const & language )
 {
     if(!ExistsLanguage(language))
@@ -38,6 +45,7 @@ void SnippetTreeView::AddLanguage( Glib::ustring const & language )
         row[m_columns.m_id]   = (uint64_t)-1;
     }
 }
+//##################################################################################################################
 void SnippetTreeView::AddCategory( Glib::ustring const & language , Glib::ustring const & category )
 {
 
@@ -50,6 +58,7 @@ void SnippetTreeView::AddCategory( Glib::ustring const & language , Glib::ustrin
     row[m_columns.m_text] = category;
     row[m_columns.m_id]   = (uint64_t)-1;   
 }
+//##################################################################################################################
 void SnippetTreeView::AddSnippet( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title    , uint64_t id )
 {
     if(!ExistsSnippet(language,category,title,id))
@@ -65,19 +74,22 @@ void SnippetTreeView::AddSnippet( Glib::ustring const & language , Glib::ustring
         }
     }
 }
+//##################################################################################################################
 SnippetTreeView::~SnippetTreeView()
 {
 }
+//##################################################################################################################
 SnippetTreeView::ModelColumns::ModelColumns()
 {
     add(m_text);
     add(m_id);
 }
+//##################################################################################################################
 bool SnippetTreeView::ExistsLanguage( Glib::ustring const & language )
 {
     return (m_language_iter_map.find(language) != m_language_iter_map.end());
 }
-
+//##################################################################################################################
 bool SnippetTreeView::ExistsCategory( Glib::ustring const & language , Glib::ustring const & category )
 {
     if(ExistsLanguage(language))
@@ -96,8 +108,41 @@ bool SnippetTreeView::ExistsCategory( Glib::ustring const & language , Glib::ust
     }
     return false;
 }
-
+//##################################################################################################################
 bool SnippetTreeView::ExistsSnippet ( Glib::ustring const & language , Glib::ustring const & category , Glib::ustring const & title , uint64_t id )
+{
+    try
+    {
+        tree_iter iter = FindCategoryIter(language,category);
+        tree_iter b = iter->children().begin();
+        tree_iter e = iter->children().end();
+        while( b != e)
+        {
+            if((*b)[m_columns.m_text] == title && 
+                (*b)[m_columns.m_id]   == id)
+            {
+                return true;
+            }
+            ++b;
+        }
+    }
+    catch(SnalpException const &)
+    {
+        return false;
+    }
+    return false;
+}
+//##################################################################################################################
+void SnippetTreeView::OnClickEvent()
+{
+    tree_iter iter = m_treeview->get_selection()->get_selected();
+    if((*iter)[m_columns.m_id] != (uint64_t)-1)
+    {
+        on_click_slot((*iter)[m_columns.m_id]);
+    }
+}
+//##################################################################################################################
+SnippetTreeView::tree_iter SnippetTreeView::FindCategoryIter( Glib::ustring const & language , Glib::ustring const & category )
 {
     if(ExistsCategory(language,category))
     {
@@ -108,28 +153,17 @@ bool SnippetTreeView::ExistsSnippet ( Glib::ustring const & language , Glib::ust
         {
             if((*b)[m_columns.m_text] == category)
             {
-                tree_iter b_child = iter->children().begin();
-                tree_iter e_child = iter->children().end();
-                while( b_child != e_child)
-                {
-                    if((*b_child)[m_columns.m_text] == title && 
-                       (*b_child)[m_columns.m_id]   == id)
-                    {
-                            return true;
-                    }
-                    ++b_child;
-                }
+                return b;
             }
-            ++b;
         }
+        THROW_SNALP_EXCEPTION(SnalpNotFoundException,"Category not found!");
     }
-    return false;
-}
-void SnippetTreeView::OnClickEvent()
-{
-    tree_iter iter = m_treeview->get_selection()->get_selected();
-    if((*iter)[m_columns.m_id] != (uint64_t)-1)
+    else 
     {
-        on_click_slot((*iter)[m_columns.m_id]);
+        THROW_SNALP_EXCEPTION(SnalpNotFoundException,"Language not found!");
     }
+  
+    // Dummy against compiler warnings
+    return tree_iter();
 }
+//##################################################################################################################

@@ -109,29 +109,21 @@ void Database::InitCheck()
 //##################################################################
 void Database::Reload()
 {
-    if(!m_db)
-        return;
-    m_result.clear();
-    std::string sql_lang = "SELECT * FROM LANGUAGES;";
-    std::string sql_cat  = "SELECT * FROM CATEGORIES;";
-    Query(sql_lang);
     try
     {
-        m_languages.clear();
-        for(size_t i = 0; i < m_result.size();++i)
-            m_languages[boost::lexical_cast<uint64_t>(m_result[i]["id"])] = m_result[i]["name"];
-    }
-    catch(boost::bad_lexical_cast & e)
-    {
-        SNALP_ERROR("[FATAL][Loading languages] lexical_cast<uint64_t> failed | " << e.what());
-    }
-    m_result.clear();
-    Query(sql_cat);
-    try
-    {
-        m_groups.clear();
-        for(size_t i = 0; i < m_result.size();++i)
-            m_groups[boost::lexical_cast<uint64_t>(m_result[i]["id"])] = m_result[i]["name"];
+        if(!m_db)
+            return;
+        static char const * sql_cmds[] = { "SELECT * FROM LANGUAGES;","SELECT * FROM CATEGORIES;"};
+
+        for(size_t i = 0; i < 2; ++i)
+        {
+            m_result.clear();
+            Query(sql_cmds[i]);
+            m_languages.clear();
+            for(size_t i = 0; i < m_result.size();++i)
+                m_languages[boost::lexical_cast<uint64_t>(m_result[i]["id"])] = m_result[i]["name"];
+        }
+
     }
     catch(boost::bad_lexical_cast & e)
     {
@@ -142,12 +134,13 @@ void Database::Reload()
 //##################################################################
 void Database::LoadTopics()
 {
-    m_result.clear();
-    m_treeview_id_map.clear();
-    std::string sql_topic = "SELECT language,category,id,topic from Snippets;";
-    Query(sql_topic);
     try
     {
+        m_result.clear();
+        m_treeview_id_map.clear();
+        std::string sql_topic = "SELECT language,category,id,topic from Snippets;";
+        Query(sql_topic);
+
         for(size_t i = 0; i < m_result.size(); ++i)
         {
             uint64_t id       = boost::lexical_cast<uint64_t>(m_result[i]["id"]);
@@ -156,6 +149,7 @@ void Database::LoadTopics()
             m_topic_map[id] = m_result[i]["topic"];
             m_treeview_id_map[lang_id][group_id].push_back(id);
         }
+
     }
     catch( boost::bad_lexical_cast & e )
     {
