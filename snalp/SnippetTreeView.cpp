@@ -21,8 +21,7 @@ SnippetTreeView::SnippetTreeView( Glib::RefPtr<Gnome::Glade::Xml> xmlref)
     }
     catch( Gnome::Glade::XmlError & e )
     {
-        SNALP_ERROR(e.what());
-        exit(0);
+        THROW_SNALP_EXCEPTION(SnalpFatalException,e.what());
     }
     catch(...)
     {
@@ -73,16 +72,6 @@ void SnippetTreeView::AddSnippet( Glib::ustring const & language , Glib::ustring
             }
         }
     }
-}
-//##################################################################################################################
-SnippetTreeView::~SnippetTreeView()
-{
-}
-//##################################################################################################################
-SnippetTreeView::ModelColumns::ModelColumns()
-{
-    add(m_text);
-    add(m_id);
 }
 //##################################################################################################################
 bool SnippetTreeView::ExistsLanguage( Glib::ustring const & language )
@@ -165,5 +154,15 @@ SnippetTreeView::tree_iter SnippetTreeView::FindCategoryIter( Glib::ustring cons
   
     // Dummy against compiler warnings
     return tree_iter();
+}
+//##################################################################################################################
+SnippetTreeView::~SnippetTreeView()
+{
+}
+//##################################################################################################################
+SnippetTreeView::ModelColumns::ModelColumns()
+{
+    add(m_text);
+    add(m_id);
 }
 //##################################################################################################################

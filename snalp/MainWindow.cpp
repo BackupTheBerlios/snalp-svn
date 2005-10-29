@@ -4,6 +4,7 @@
 #include <iostream>
 #include <gtkmm.h>
 #include <libglademm.h>
+#include "SnalpException.h"
 #include "SnippetTreeView.h"
 #include "debughelper.h"
 
@@ -22,8 +23,7 @@ MainWindow::MainWindow()
     }
     catch( Gnome::Glade::XmlError & e )
     {
-        SNALP_ERROR(e.what());
-        exit(0);
+        THROW_SNALP_EXCEPTION(SnalpFatalException,e.what());
     }
 }
 //##################################################################################################################
@@ -49,8 +49,7 @@ void MainWindow::ConnectMenuSignals()
     }
     catch( Gnome::Glade::XmlError & e)
     {
-        SNALP_ERROR(e.what());
-        exit(0);
+        THROW_SNALP_EXCEPTION(SnalpFatalException,e.what());
     }
 }
 //##################################################################################################################
