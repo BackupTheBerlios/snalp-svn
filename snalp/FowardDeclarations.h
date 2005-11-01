@@ -8,6 +8,8 @@
 #endif
 
 #include <glibmm/ustring.h>
+#include <glibmm/refptr.h>
+#include <boost/shared_ptr.hpp>
 
 namespace Gnome
 {
@@ -23,8 +25,13 @@ namespace Gtk
     class TextView;
     class TreeStore;
     class TreeView;
+    class Dialog;
+    class Entry;
 }
 
+class Database;
 class SnippetTreeView;
+struct SnalpSignals;
+typedef Glib::RefPtr<Gnome::Glade::Xml> GladeRef;
 
 #endif

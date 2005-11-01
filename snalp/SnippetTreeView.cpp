@@ -7,7 +7,7 @@
 #include <gtkmm/treeview.h>
 
 //##################################################################################################################
-SnippetTreeView::SnippetTreeView( Glib::RefPtr<Gnome::Glade::Xml> xmlref)
+SnippetTreeView::SnippetTreeView( GladeRef xmlref)
 {
     try
     {
@@ -166,3 +166,8 @@ SnippetTreeView::ModelColumns::ModelColumns()
     add(m_id);
 }
 //##################################################################################################################
+void SnippetTreeView::Clear()
+{
+    m_storage->clear();
+    m_language_iter_map.clear();
+}

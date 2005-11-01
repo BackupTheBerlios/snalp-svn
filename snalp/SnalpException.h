@@ -1,6 +1,7 @@
 #ifndef GUARD_SNALPEXCEPTION_H_INCLUDED
 #define GUARD_SNALPEXCEPTION_H_INCLUDED 1
 #include <string>
+#include <sstream>
 #include <fstream>
 
 #define THROW_SNALP_EXCEPTION( ExceptionType , ExceptionMessage )\

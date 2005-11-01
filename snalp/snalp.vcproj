@@ -25,6 +25,7 @@
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
+				RuntimeTypeInfo="TRUE"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="TRUE"
@@ -124,10 +125,22 @@
 				RelativePath=".\Database.cpp">
 			</File>
 			<File
+				RelativePath=".\DatabaseTests.cpp">
+			</File>
+			<File
 				RelativePath=".\MainWindow.cpp">
 			</File>
 			<File
 				RelativePath=".\snalp.cpp">
+			</File>
+			<File
+				RelativePath=".\SnalpAddCategoryDialog.cpp">
+			</File>
+			<File
+				RelativePath=".\SnalpAddLanguageDialog.cpp">
+			</File>
+			<File
+				RelativePath=".\SnalpDialogs.cpp">
 			</File>
 			<File
 				RelativePath=".\SnippetTreeView.cpp">
@@ -141,6 +154,9 @@
 				RelativePath=".\Database.h">
 			</File>
 			<File
+				RelativePath=".\DatabaseTests.h">
+			</File>
+			<File
 				RelativePath=".\debughelper.h">
 			</File>
 			<File
@@ -150,7 +166,19 @@
 				RelativePath=".\MainWindow.h">
 			</File>
 			<File
+				RelativePath=".\SnalpAddCategoryDialog.h">
+			</File>
+			<File
+				RelativePath=".\SnalpAddLanguageDialog.h">
+			</File>
+			<File
+				RelativePath=".\SnalpDialogs.h">
+			</File>
+			<File
 				RelativePath=".\SnalpException.h">
+			</File>
+			<File
+				RelativePath=".\SnalpSignals.h">
 			</File>
 			<File
 				RelativePath=".\SnippetTreeView.h">

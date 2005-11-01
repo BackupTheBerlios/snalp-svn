@@ -1,16 +1,7 @@
 #ifndef GUARD_DATABASE_H_INCLUDED
 #define GUARD_DATABASE_H_INCLUDED
 #include "types.h"
-#include <vector>
-#include <string>
-#include <map>
 
-typedef std::vector< std::string >         StringList;
-typedef std::vector<uint64_t>              IdList;
-typedef std::map< uint64_t , std::string > IdToStringMap;
-typedef std::map< unsigned , std::map< unsigned , IdList > > TreeviewIdMap;
-typedef std::map< std::string , std::string > ResultMap;
-typedef std::vector<ResultMap>                ResultMapList;
 struct sqlite3;
 struct SnippetItem
 {
@@ -31,11 +22,16 @@ public:
     ~Database();
     IdToStringMap & GetLanguages();
     IdToStringMap & GetGroups();
+    TreeviewIdMap & GetAll();
     std::string const & GetTopic( uint64_t id );
     void AddLanguage( std::string const & lang );
     void AddGroup( std::string const & group );
     void AddSnippet( SnippetItem const & item );
     void GetSnippet( uint64_t id , SnippetItem & item );
+
+    bool ExistsLanguage( std::string const & lang );
+    bool ExistsGroup( std::string const & cat );
+    bool Exists( std::string const & table , std::string const & col_name , std::string const & value );
 private:
     void Execute( std::string const & sqlstatement );
     void Query(std::string const & sqlstatement );

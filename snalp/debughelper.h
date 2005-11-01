@@ -1,6 +1,6 @@
-
 #ifndef GUARD_DEBUGHELPER_H_INCLUDED
-#define GUARD_DEBUGHELPER_H_INCLUDED
+#define GUARD_DEBUGHELPER_H_INCLUDED 1
+
 #include <fstream>
 #include <sstream>
 
@@ -21,7 +21,7 @@ inline void WriteToErrorFile( std::ostringstream const & ostr )
 #ifdef _DEBUG
     #define SNALP_DEBUG(x) SNALP_LOG("[DEBUG]" << x)
 #else
-    #define SNALP_DEBUG(x) 
+    #define SNALP_DEBUG(x) SNALP_LOG("[DEBUG]" << x)
 #endif 
 
 #endif  //GUARD_DEBUGHELPER_H_INCLUDED

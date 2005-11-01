@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Database.h"
 #include "debughelper.h"
 #include <boost/lexical_cast.hpp>
@@ -65,6 +66,11 @@ std::string const & Database::GetTopic( uint64_t id )
     return m_topic_map[id];
 }
 //##################################################################
+TreeviewIdMap & Database::GetAll()
+{
+    return m_treeview_id_map;
+}
+//##################################################################
 void Database::CreateEmptyDatabase()
 {
     Execute(DatabaseSchemaCreation);
@@ -117,14 +123,14 @@ void Database::Reload()
         if(!m_db)
             return;
         static char const * sql_cmds[] = { "SELECT * FROM LANGUAGES;","SELECT * FROM CATEGORIES;"};
-
+        static IdToStringMap * maps[] = { &m_languages , &m_groups };
         for(size_t i = 0; i < 2; ++i)
         {
             m_result.clear();
             Query(sql_cmds[i]);
-            m_languages.clear();
-            for(size_t i = 0; i < m_result.size();++i)
-                m_languages[boost::lexical_cast<uint64_t>(m_result[i]["id"])] = m_result[i]["name"];
+            maps[i]->clear();
+            for(size_t j = 0; j < m_result.size();++j)
+                (*maps[i])[boost::lexical_cast<uint64_t>(m_result[j]["id"])] = m_result[j]["name"];
         }
 
     }
@@ -162,16 +168,22 @@ void Database::LoadTopics()
 //##################################################################
 void Database::AddLanguage( std::string const & lang )
 {
+    if(ExistsLanguage(lang))
+        return; // Nothing todo
     std::ostringstream ostr;
-    ostr << "INSERT INTO LANGUAGES VALUES( NULL , " << lang << ");";
+    ostr << "INSERT INTO LANGUAGES VALUES( NULL , '" << lang << "');";
     Execute(ostr.str());
+    Reload();
 }
 //##################################################################
 void Database::AddGroup( std::string const & group )
 {
+    if(ExistsGroup(group))
+        return; // Nothing todo
     std::ostringstream ostr;
-    ostr << "INSERT INTO CATEGORIES VALUES( NULL , " << group << ");";
+    ostr << "INSERT INTO CATEGORIES VALUES( NULL , '"<< group << "');";
     Execute(ostr.str());
+    Reload();
 }
 //##################################################################
 void Database::AddSnippet( SnippetItem const & item )
@@ -186,6 +198,7 @@ void Database::AddSnippet( SnippetItem const & item )
         % item.author
         % item.snippet_data;
      Execute(fmt.str());
+     Reload();
 }
 //##################################################################
 void Database::GetSnippet( uint64_t id , SnippetItem & item )
@@ -226,4 +239,22 @@ void Database::Execute( std::string const & sqlstatement )
     }        
 }
 //##################################################################
-
+bool Database::ExistsLanguage( std::string const & lang )
+{
+    return Exists("Languages","name",lang);
+}
+//##################################################################
+bool Database::ExistsGroup( std::string const & cat )
+{
+    return Exists("Categories","name",cat);
+}
+//##################################################################
+bool Database::Exists( std::string const & table , std::string const & col_name , std::string const & value )
+{
+    boost::format fmt("SELECT %2% from %1% WHERE %2% LIKE '%3%';");
+    fmt % table % col_name % value;
+    m_result.clear();
+    Query(fmt.str());
+    return !m_result.empty();
+}
+//##################################################################
