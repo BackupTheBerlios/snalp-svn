@@ -5,7 +5,10 @@
     #pragma warning( disable :4250)
     #pragma warning( disable :4541)
     #pragma once
+	#pragma warning(disable :4996)
 #endif
+
+
 
 #include <glibmm/ustring.h>
 #include <glibmm/refptr.h>
